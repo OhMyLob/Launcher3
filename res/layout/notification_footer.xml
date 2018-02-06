@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2017 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2017 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,32 +14,31 @@
 -->
 
 
-<com.android.launcher3.notification.NotificationFooterLayout
+<com.android.launcher3.notification.NotificationFooterLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:elevation="@dimen/notification_elevation"
-    android:clipChildren="false"
     android:layout_gravity="center_vertical"
-    android:background="?attr/popupColorPrimary">
+    android:background="?attr/popupColorPrimary"
+    android:clipChildren="false"
+    android:elevation="@dimen/notification_elevation">
 
     <LinearLayout
         android:id="@+id/icon_row"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="end|center_vertical"
-        android:padding="@dimen/notification_footer_icon_row_padding"
+        android:clipChildren="false"
         android:clipToPadding="false"
-        android:clipChildren="false"/>
+        android:gravity="end|center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/notification_footer_icon_row_padding" />
 
     <View
         android:id="@+id/overflow"
         android:layout_width="@dimen/horizontal_ellipsis_size"
         android:layout_height="@dimen/horizontal_ellipsis_size"
-        android:background="@drawable/horizontal_ellipsis"
+        android:layout_gravity="start|center_vertical"
         android:layout_marginStart="@dimen/horizontal_ellipsis_offset"
-        android:layout_gravity="start|center_vertical" />
+        android:background="@drawable/horizontal_ellipsis" />
 
 </com.android.launcher3.notification.NotificationFooterLayout>
 

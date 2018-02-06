@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2017 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2017 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,8 +12,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<com.android.launcher3.allapps.search.AppsSearchContainerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.android.launcher3.allapps.search.AppsSearchContainerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@id/search_container_all_apps"
     android:layout_width="match_parent"
     android:layout_height="@dimen/all_apps_search_bar_height"
@@ -23,7 +21,7 @@
     android:gravity="center|bottom"
     android:paddingLeft="@dimen/dynamic_grid_edge_margin"
     android:paddingRight="@dimen/dynamic_grid_edge_margin"
-    android:saveEnabled="false" >
+    android:saveEnabled="false">
 
     <!--
       Note: The following relation should always be true so that the shadows are aligned properly
@@ -60,10 +58,11 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="8dp" >
+        android:layout_marginBottom="8dp">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/all_apps_search_divider"/>
+            android:background="@drawable/all_apps_search_divider" />
     </FrameLayout>
 </com.android.launcher3.allapps.search.AppsSearchContainerLayout>

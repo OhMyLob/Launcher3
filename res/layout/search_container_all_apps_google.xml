@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2018 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +14,7 @@
      limitations under the License.
 -->
 
-<com.google.android.apps.nexuslauncher2.qsb.AllAppsQsbLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.apps.nexuslauncher2.qsb.AllAppsQsbLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/search_container_all_apps"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/qsb_widget_height"

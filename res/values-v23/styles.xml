@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="SettingsTheme" parent="@android:style/Theme.Material.Settings">
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:actionBarTheme">@style/SettingsTheme.ActionBar</item>

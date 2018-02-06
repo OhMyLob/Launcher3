@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2016 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,39 +14,37 @@
      limitations under the License.
 -->
 
-<profiles xmlns:launcher="http://schemas.android.com/apk/res-auto/com.android.launcher3" >
+<profiles xmlns:launcher="http://schemas.android.com/apk/res-auto/com.android.launcher3">
 
     <profile
-        launcher:name="Pixel (Display Size set to Largest)"
-        launcher:minWidthDps="296"
-        launcher:minHeightDps="496"
-        launcher:numRows="4"
-        launcher:numColumns="4"
-        launcher:numFolderRows="3"
-        launcher:numFolderColumns="4"
-        launcher:minAllAppsPredictionColumns="4"
-        launcher:numHotseatIcons="4"
-        launcher:iconSize="56"
-        launcher:landscapeIconSize="54"
-        launcher:iconTextSize="13.0"
         launcher:defaultLayoutId="@xml/default_workspace_4x4"
-        />
+        launcher:iconSize="56"
+        launcher:iconTextSize="13.0"
+        launcher:landscapeIconSize="54"
+        launcher:minAllAppsPredictionColumns="4"
+        launcher:minHeightDps="496"
+        launcher:minWidthDps="296"
+        launcher:name="Pixel (Display Size set to Largest)"
+        launcher:numColumns="4"
+        launcher:numFolderColumns="4"
+        launcher:numFolderRows="3"
+        launcher:numHotseatIcons="4"
+        launcher:numRows="4" />
 
     <profile
-        launcher:name="Pixel"
-        launcher:minWidthDps="387"
-        launcher:minHeightDps="659"
-        launcher:numRows="5"
-        launcher:numColumns="5"
-        launcher:numFolderRows="4"
-        launcher:numFolderColumns="4"
-        launcher:minAllAppsPredictionColumns="4"
-        launcher:numHotseatIcons="5"
-        launcher:iconSize="56"
-        launcher:landscapeIconSize="54"
-        launcher:iconTextSize="13.0"
         launcher:defaultLayoutId="@xml/default_workspace_5x5"
-        />
+        launcher:iconSize="56"
+        launcher:iconTextSize="13.0"
+        launcher:landscapeIconSize="54"
+        launcher:minAllAppsPredictionColumns="4"
+        launcher:minHeightDps="659"
+        launcher:minWidthDps="387"
+        launcher:name="Pixel"
+        launcher:numColumns="5"
+        launcher:numFolderColumns="4"
+        launcher:numFolderRows="4"
+        launcher:numHotseatIcons="5"
+        launcher:numRows="5" />
 
     <!-- Bugged on 16:9 without navbar
     <profile
@@ -68,36 +65,34 @@
     -->
 
     <profile
-        launcher:name="Taimen"
-        launcher:minWidthDps="387"
-        launcher:minHeightDps="750"
-        launcher:numRows="5"
-        launcher:numColumns="5"
-        launcher:numFolderRows="4"
-        launcher:numFolderColumns="4"
-        launcher:minAllAppsPredictionColumns="4"
-        launcher:numHotseatIcons="5"
-        launcher:iconSize="54"
-        launcher:landscapeIconSize="52"
-        launcher:iconTextSize="13.0"
         launcher:defaultLayoutId="@xml/default_workspace_5x5"
-        />
+        launcher:iconSize="54"
+        launcher:iconTextSize="13.0"
+        launcher:landscapeIconSize="52"
+        launcher:minAllAppsPredictionColumns="4"
+        launcher:minHeightDps="750"
+        launcher:minWidthDps="387"
+        launcher:name="Taimen"
+        launcher:numColumns="5"
+        launcher:numFolderColumns="4"
+        launcher:numFolderRows="4"
+        launcher:numHotseatIcons="5"
+        launcher:numRows="5" />
 
     <profile
-        launcher:name="Low DPI"
-        launcher:minWidthDps="498"
-        launcher:minHeightDps="750"
-        launcher:numRows="6"
-        launcher:numColumns="6"
-        launcher:numFolderRows="4"
-        launcher:numFolderColumns="4"
-        launcher:minAllAppsPredictionColumns="4"
-        launcher:numHotseatIcons="6"
-        launcher:iconSize="52"
-        launcher:landscapeIconSize="50"
-        launcher:iconTextSize="13.0"
         launcher:defaultLayoutId="@xml/default_workspace_6x6"
-        />
+        launcher:iconSize="52"
+        launcher:iconTextSize="13.0"
+        launcher:landscapeIconSize="50"
+        launcher:minAllAppsPredictionColumns="4"
+        launcher:minHeightDps="750"
+        launcher:minWidthDps="498"
+        launcher:name="Low DPI"
+        launcher:numColumns="6"
+        launcher:numFolderColumns="4"
+        launcher:numFolderRows="4"
+        launcher:numHotseatIcons="6"
+        launcher:numRows="6" />
 
     <!--
     <profile

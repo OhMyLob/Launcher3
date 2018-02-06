@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /*
 * Copyright (C) 2008 The Android Open Source Project
 *
@@ -99,7 +98,7 @@
 
     <style name="WidgetContainerTheme.Dark" />
 
-    <style name="FastScrollerPopup" >
+    <style name="FastScrollerPopup">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:minWidth">@dimen/fastscroll_popup_width</item>
         <item name="android:layout_height">@dimen/fastscroll_popup_height</item>
@@ -144,6 +143,7 @@
     <style name="PopupItem">
         <item name="android:colorControlHighlight">?attr/popupColorTertiary</item>
     </style>
+
     <style name="PopupGutter">
         <item name="android:backgroundTintMode">multiply</item>
         <item name="android:backgroundTint">?attr/popupColorSecondary</item>
@@ -178,6 +178,7 @@
         <item name="android:colorControlHighlight">#BDBDBD</item>
         <item name="android:colorForeground">@color/all_apps_bg_hand_fill</item>
     </style>
+
     <style name="AllAppsEmptySearchBackground.Dark">
         <item name="android:colorPrimary">#9AA0A6</item>
         <item name="android:colorControlHighlight">#DFE1E5</item>
@@ -188,20 +189,25 @@
     <style name="GoogleSearchLauncherTheme" parent="@style/LauncherTheme">
         <item name="android:keyboardLayout">@layout/search_container_all_apps_google</item>
     </style>
+
     <style name="GoogleSearchLauncherThemeDark" parent="@style/LauncherThemeDark">
         <item name="android:keyboardLayout">@layout/search_container_all_apps_google</item>
     </style>
+
     <style name="GoogleSearchLauncherThemeDarkText" parent="@style/LauncherThemeDarkText">
         <item name="android:keyboardLayout">@layout/search_container_all_apps_google</item>
     </style>
+
     <style name="HotseatQsbTheme">
         <item name="gIcon">@drawable/ic_super_g_shadow</item>
         <item name="micIcon">@drawable/ic_mic_shadow</item>
     </style>
+
     <style name="HotseatQsbTheme.Colored" parent="@style/HotseatQsbTheme">
         <item name="gIcon">@drawable/ic_super_g_color</item>
         <item name="micIcon">@drawable/ic_mic_color</item>
     </style>
+
     <style name="SettingsTheme" parent="@android:style/Theme.Material.Settings">
         <item name="android:actionBarTheme">@style/SettingsTheme.ActionBar</item>
         <item name="android:colorPrimary">@color/colorPrimary</item>
@@ -209,6 +215,7 @@
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@color/lollipopStatusBar</item>
     </style>
+
     <style name="SettingsTheme.ActionBar">
         <item name="android:textColorPrimary">@color/colorAccent</item>
         <item name="android:colorControlNormal">@color/colorAccent</item>

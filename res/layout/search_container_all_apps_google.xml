@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 
-<com.google.android.apps.nexuslauncher.qsb.AllAppsQsbLayout
+<com.google.android.apps.nexuslauncher2.qsb.AllAppsQsbLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/search_container_all_apps"
     android:layout_width="fill_parent"
@@ -46,4 +46,4 @@
         android:contentDescription="@string/label_voice_search"
         android:scaleType="center"
         android:src="@drawable/ic_mic_color" />
-</com.google.android.apps.nexuslauncher.qsb.AllAppsQsbLayout>
+</com.google.android.apps.nexuslauncher2.qsb.AllAppsQsbLayout>

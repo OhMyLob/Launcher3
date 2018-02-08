@@ -8,3 +8,5 @@ Works on any device running at least Lollipop.
 The only thing that doesn't work is "At a Glance".
 It'll only display the day of the week/month.
 No weather or any additional features will be shown, as they are handled by the Google App, using package focused Intents that point to the stock Pixel Launcher package name.
+
+[APK Download](https://github.com/OhMyLob/Pixel-Launcher3/raw/o-mr1/PixelLauncher3-aosp-debug.apk)

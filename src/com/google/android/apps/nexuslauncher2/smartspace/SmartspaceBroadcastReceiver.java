@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.SystemClock;
 import android.util.Log;
 
-import com.google.android.apps.nexuslauncher2.smartspace.nano.SmartspaceProto.b;
+import com.google.android.apps.nexuslauncher.smartspace.nano.SmartspaceProto.b;
 import com.google.protobuf.nano.InvalidProtocolBufferNanoException;
 
 public class SmartspaceBroadcastReceiver extends BroadcastReceiver {
@@ -27,7 +27,7 @@ public class SmartspaceBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         byte[] byteArrayExtra = intent.getByteArrayExtra("com.google.android.apps.nexuslauncher.extra.SMARTSPACE_CARD");
         if (byteArrayExtra != null) {
-            com.google.android.apps.nexuslauncher2.smartspace.nano.SmartspaceProto.a a = new com.google.android.apps.nexuslauncher2.smartspace.nano.SmartspaceProto.a();
+            com.google.android.apps.nexuslauncher.smartspace.nano.SmartspaceProto.a a = new com.google.android.apps.nexuslauncher.smartspace.nano.SmartspaceProto.a();
             try {
                 com.google.protobuf.nano.MessageNano.mergeFrom(a, byteArrayExtra);
                 b[] cw = a.cw;

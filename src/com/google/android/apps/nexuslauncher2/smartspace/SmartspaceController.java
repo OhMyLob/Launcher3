@@ -11,7 +11,7 @@ import com.android.launcher3.Alarm;
 import com.android.launcher3.LauncherModel;
 import com.android.launcher3.OnAlarmListener;
 import com.google.android.apps.nexuslauncher2.utils.ActionIntentFilter;
-import com.google.android.apps.nexuslauncher2.smartspace.nano.SmartspaceProto.i;
+import com.google.android.apps.nexuslauncher.smartspace.nano.SmartspaceProto.i;
 import com.google.android.apps.nexuslauncher2.utils.ProtoStore;
 
 import java.io.PrintWriter;

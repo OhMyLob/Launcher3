@@ -223,7 +223,6 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         mSearchUiManager = (SearchUiManager) mSearchContainer;
         mSearchUiManager.initialize(mApps, mAppsRecyclerView);
 
-
         FocusedItemDecorator focusedItemDecorator = new FocusedItemDecorator(mAppsRecyclerView);
         mAppsRecyclerView.addItemDecoration(focusedItemDecorator);
         mAppsRecyclerView.preMeasureViews(mAdapter);

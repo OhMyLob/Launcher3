@@ -18,7 +18,6 @@ import android.widget.RemoteViews;
 
 import com.android.launcher3.AppInfo;
 import com.android.launcher3.BubbleTextView;
-import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.allapps.AllAppsRecyclerView;
@@ -42,16 +41,16 @@ public class ConfigBuilder {
     private final NexusLauncherActivity mActivity;
     private final Bundle cn;
     private boolean co;
-    private final AbstractQsbLayout cp;
+    private final AbstractQsbLayout qsbLayout;
     private BubbleTextView cq;
     private final boolean cr;
     private final UserManagerCompat mUserManager;
 
-    public ConfigBuilder(AbstractQsbLayout cp, boolean cr) {
+    public ConfigBuilder(AbstractQsbLayout qsbLayout, boolean cr) {
         cn = new Bundle();
         cl = new c_search();
-        this.cp = cp;
-        mActivity = cp.mActivity;
+        this.qsbLayout = qsbLayout;
+        mActivity = qsbLayout.mActivity;
         this.cr = cr;
         mUserManager = UserManagerCompat.getInstance(mActivity);
     }
@@ -119,22 +118,22 @@ public class ConfigBuilder {
 
     private RemoteViews cb() {
         final RemoteViews remoteViews = new RemoteViews(mActivity.getPackageName(), R.layout.apps_search_qsb_template);
-        final int n = cp.getHeight() - cp.getPaddingTop() - cp.getPaddingBottom() + 20;
-        final Bitmap mShadowBitmap = cp.mShadowBitmap;
+        final int n = qsbLayout.getHeight() - qsbLayout.getPaddingTop() - qsbLayout.getPaddingBottom() + 20;
+        final Bitmap mShadowBitmap = qsbLayout.mShadowBitmap;
         final int n2 = (mShadowBitmap.getWidth() - n) / 2;
-        final int n3 = (cp.getHeight() - mShadowBitmap.getHeight()) / 2;
-        remoteViews.setViewPadding(R.layout.all_apps_discovery_loading_divider, cp.getPaddingLeft() - n2, n3, cp.getPaddingRight() - n2, n3);
+        final int n3 = (qsbLayout.getHeight() - mShadowBitmap.getHeight()) / 2;
+        remoteViews.setViewPadding(R.layout.all_apps_discovery_loading_divider, qsbLayout.getPaddingLeft() - n2, n3, qsbLayout.getPaddingRight() - n2, n3);
         final Bitmap bitmap = Bitmap.createBitmap(mShadowBitmap, 0, 0, mShadowBitmap.getWidth() / 2, mShadowBitmap.getHeight());
         remoteViews.setImageViewBitmap(R.id.qsb_background_1, bitmap);
         remoteViews.setImageViewBitmap(R.id.qsb_background_3, bitmap);
         remoteViews.setImageViewBitmap(R.id.qsb_background_2, Bitmap.createBitmap(mShadowBitmap, (mShadowBitmap.getWidth() - 20) / 2, 0, 20, mShadowBitmap.getHeight()));
-        if (cp.mMicIconView.getVisibility() != View.VISIBLE) {
+        if (qsbLayout.mMicIconView.getVisibility() != View.VISIBLE) {
             remoteViews.setViewVisibility(R.id.mic_icon, View.INVISIBLE);
         }
-        final View viewById = cp.findViewById(R.id.g_icon);
+        final View viewById = qsbLayout.findViewById(R.id.g_icon);
         int left;
-        if (cp.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
-            left = cp.getWidth() - viewById.getRight();
+        if (qsbLayout.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+            left = qsbLayout.getWidth() - viewById.getRight();
         } else {
             left = viewById.getLeft();
         }
@@ -157,7 +156,7 @@ public class ConfigBuilder {
         cl.ew = R.id.g_icon;
         final c_search cl = this.cl;
         int ex;
-        if (cp.mMicIconView.getVisibility() != View.VISIBLE) {
+        if (qsbLayout.mMicIconView.getVisibility() != View.VISIBLE) {
             ex = 0;
         } else {
             ex = R.id.mic_icon;
@@ -311,7 +310,7 @@ public class ConfigBuilder {
         cl.er = "icon_long_click";
         cn.putParcelable(cl.er, PendingIntent.getBroadcast(mActivity, 2055, new Intent().setComponent(new ComponentName(mActivity, LongClickReceiver.class)), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT));
         LongClickReceiver.bq(mActivity);
-        cl.ev = getViewBounds(cp);
+        cl.ev = getViewBounds(qsbLayout);
         cl.eA = cr;
         if (cr) {
             cd();

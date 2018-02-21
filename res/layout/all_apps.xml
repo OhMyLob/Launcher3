@@ -30,7 +30,6 @@
         android:focusable="false"
         android:visibility="invisible" />
 
-
     <com.android.launcher3.allapps.AllAppsRecyclerViewContainerView
         android:id="@+id/main_content"
         android:layout_width="match_parent"
@@ -68,4 +67,5 @@
         android:layout_gravity="bottom"
         android:background="?attr/allAppsNavBarScrimColor"
         android:focusable="false" />
+
 </com.android.launcher3.allapps.AllAppsContainerView>

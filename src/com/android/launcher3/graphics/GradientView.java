@@ -49,6 +49,9 @@ public class GradientView extends View implements WallpaperColorInfo.OnChangeLis
     private static final int ALPHA_MASK_WIDTH_DP = 2;
     private static final boolean DEBUG = false;
 
+    private static final boolean GRADIENT_PREVIEW_IN_WORKSPACE = false;
+    private static final boolean DYNAMIC_SCRIM_COLOR = false;
+
     private final Bitmap mAlphaGradientMask;
 
     private boolean mShowScrim = true;
@@ -76,7 +79,10 @@ public class GradientView extends View implements WallpaperColorInfo.OnChangeLis
         this.mMaskWidth = Utilities.pxFromDp(ALPHA_MASK_WIDTH_DP, dm);
         Launcher launcher = Launcher.getLauncher(context);
         this.mAlphaStart = launcher.getDeviceProfile().isVerticalBarLayout() ? 0 : 100;
-        this.mScrimColor = Themes.getAttrColor(context, R.attr.allAppsScrimColor);
+        this.mScrimColor = DYNAMIC_SCRIM_COLOR
+                ? Themes.getAttrColor(context, R.attr.allAppsScrimColor)
+                : context.getResources().getColor(WallpaperColorInfo.getInstance(context).isDark()
+                        ? R.color.darkAppDrawerBgColor : R.color.lightAppDrawerBgColor);
         this.mWallpaperColorInfo = WallpaperColorInfo.getInstance(launcher);
         mAlphaColors = getResources().getInteger(R.integer.extracted_color_gradient_alpha);
         updateColors();
@@ -162,7 +168,7 @@ public class GradientView extends View implements WallpaperColorInfo.OnChangeLis
     protected void onDraw(Canvas canvas) {
         Paint paint = mShowScrim ? mPaintWithScrim : mPaintNoScrim;
 
-        float head = 0.29f;
+        float head = GRADIENT_PREVIEW_IN_WORKSPACE ? 0.29F : 0f;
         float linearProgress = head + (mProgress * (1f - head));
         float startMaskY = (1f - linearProgress) * mHeight - mMaskHeight * linearProgress;
         float interpolatedAlpha = (255 - mAlphaStart) * mAccelerator.getInterpolation(mProgress);

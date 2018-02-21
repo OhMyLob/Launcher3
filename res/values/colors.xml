@@ -56,4 +56,10 @@
 
     <color name="qsb_icon_shadow_color">#20000000</color>
     <color name="qsb_dark_icon_tint">#ff757575</color>
+
+    <color name="searchBarBgColor">#e8e8e8</color>
+    <color name="searchBarGoogleIconColor">#6a6a6a</color>
+
+    <color name="darkAppDrawerBgColor">#000</color>
+    <color name="lightAppDrawerBgColor">#FAFAFA</color>
 </resources>

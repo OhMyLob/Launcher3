@@ -85,7 +85,7 @@ public abstract class AbstractQsbLayout extends FrameLayout implements LauncherL
         super.onDetachedFromWindow();
     }
 
-    public void bz(int i) {
+    public void setSearchBarColor(int i) {
         if (mColor != i) {
             mColor = i;
             mShadowBitmap = null;

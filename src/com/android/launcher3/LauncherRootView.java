@@ -11,6 +11,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewDebug;
 
+import com.google.android.apps.nexuslauncher2.oml.OMLSettings;
+
 import static com.android.launcher3.util.SystemUiController.FLAG_DARK_NAV;
 import static com.android.launcher3.util.SystemUiController.UI_STATE_ROOT_VIEW;
 
@@ -50,6 +52,7 @@ public class LauncherRootView extends InsettableFrameLayout {
         mDrawSideInsetBar = (insets.right > 0 || insets.left > 0) &&
                 (!Utilities.ATLEAST_MARSHMALLOW ||
                         getContext().getSystemService(ActivityManager.class).isLowRamDevice());
+
         if (mDrawSideInsetBar) {
             mLeftInsetBarWidth = insets.left;
             mRightInsetBarWidth = insets.right;
@@ -57,8 +60,9 @@ public class LauncherRootView extends InsettableFrameLayout {
         } else {
             mLeftInsetBarWidth = mRightInsetBarWidth = 0;
         }
+
         Launcher.getLauncher(getContext()).getSystemUiController().updateUiState(
-                UI_STATE_ROOT_VIEW, mDrawSideInsetBar ? FLAG_DARK_NAV : 0);
+                 UI_STATE_ROOT_VIEW, mDrawSideInsetBar ? FLAG_DARK_NAV : 0);
 
         boolean rawInsetsChanged = !mInsets.equals(insets);
         setInsets(insets);

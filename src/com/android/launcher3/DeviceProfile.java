@@ -33,6 +33,7 @@ import android.widget.FrameLayout;
 
 import com.android.launcher3.CellLayout.ContainerType;
 import com.android.launcher3.badge.BadgeRenderer;
+import com.google.android.apps.nexuslauncher2.oml.OMLSettings;
 
 import java.util.ArrayList;
 
@@ -636,7 +637,7 @@ public class DeviceProfile {
         searchBar.setLayoutParams(lp);
 
         // Layout the workspace
-        PagedView workspace = (PagedView) launcher.findViewById(R.id.workspace);
+        PagedView workspace = launcher.findViewById(R.id.workspace);
         Rect workspacePadding = getWorkspacePadding(null);
         workspace.setPadding(workspacePadding.left, workspacePadding.top, workspacePadding.right,
                 workspacePadding.bottom);

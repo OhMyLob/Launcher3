@@ -28,7 +28,9 @@ import java.util.Calendar;
 import java.util.List;
 
 public class DynamicIconProvider extends IconProvider {
+
     public static final String GOOGLE_CALENDAR = "com.google.android.calendar";
+
     private final BroadcastReceiver mDateChangeReceiver;
     private final Context mContext;
     private final PackageManager mPackageManager;

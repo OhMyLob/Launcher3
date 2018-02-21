@@ -34,10 +34,10 @@ public class NexusLauncherActivity extends Launcher {
     }
 
     public List<ComponentKeyMapper<AppInfo>> getPredictedApps() {
-        return mLauncher.fA.getPredictedApps();
+        return mLauncher.mLauncherCallbacks.getPredictedApps();
     }
 
     public GoogleNow getGoogleNow() {
-        return mLauncher.fy;
+        return mLauncher.mGoogleNow;
     }
 }

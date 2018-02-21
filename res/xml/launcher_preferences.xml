@@ -75,6 +75,13 @@
         android:summary="%s"
         android:title="@string/pref_icon_pack" />
 
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="pref_legacy_icons_treatment"
+        android:persistent="true"
+        android:summary="@string/legacy_icons_treatment_summary"
+        android:title="@string/legacy_icons_treatment_title" />
+
     <PreferenceScreen
         android:key="about_screen"
         android:persistent="false"
@@ -83,7 +90,13 @@
         <Preference
             android:key="about_app_version"
             android:persistent="false"
-            android:title="@string/about_app_version">
+            android:title="@string/about_app_version" />
+
+        <Preference
+            android:key="app_on_github"
+            android:persistent="false"
+            android:summary="@string/github_repo_summary"
+            android:title="@string/github_repo_title">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="@string/app_releases_url" />

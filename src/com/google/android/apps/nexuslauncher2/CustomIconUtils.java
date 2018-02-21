@@ -8,6 +8,7 @@ import android.content.pm.ResolveInfo;
 import java.util.HashMap;
 
 public class CustomIconUtils {
+
     public final static String[] ICON_INTENTS = new String[] {
             "com.fede.launcher.THEME_ICONPACK",
             "com.anddoes.launcher.THEME",

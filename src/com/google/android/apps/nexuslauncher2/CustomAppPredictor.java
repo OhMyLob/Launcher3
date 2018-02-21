@@ -16,6 +16,7 @@ import com.android.launcher3.allapps.AllAppsContainerView;
 import com.android.launcher3.logging.UserEventDispatcher;
 import com.android.launcher3.util.ComponentKey;
 import com.android.launcher3.util.ComponentKeyMapper;
+import com.google.android.apps.nexuslauncher2.oml.OMLSettings;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,11 +26,15 @@ import java.util.List;
 import java.util.Set;
 
 public class CustomAppPredictor extends UserEventDispatcher implements SharedPreferences.OnSharedPreferenceChangeListener {
+
     private static final int MAX_PREDICTIONS = 10;
     private static final int BOOST_ON_OPEN = 7;
+
     private static final String PREDICTION_SET = "pref_prediction_set";
     private static final String PREDICTION_PREFIX = "pref_prediction_count_";
+
     private static final Set<String> EMPTY_SET = new HashSet<>();
+
     private final Context mContext;
     private final SharedPreferences mPrefs;
     private final PackageManager mPackageManager;
@@ -177,12 +182,12 @@ public class CustomAppPredictor extends UserEventDispatcher implements SharedPre
     }
 
     private boolean isPredictorEnabled() {
-        return Utilities.getPrefs(mContext).getBoolean(SettingsActivity.SHOW_PREDICTIONS_PREF, false);
+        return Utilities.getPrefs(mContext).getBoolean(OMLSettings.SHOW_PREDICTIONS_PREF, false);
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(SettingsActivity.SHOW_PREDICTIONS_PREF) && !isPredictorEnabled()) {
+        if (key.equals(OMLSettings.SHOW_PREDICTIONS_PREF) && !isPredictorEnabled()) {
             Set<String> predictionSet = getStringSetCopy();
 
             SharedPreferences.Editor edit = mPrefs.edit();

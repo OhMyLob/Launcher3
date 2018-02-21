@@ -6,12 +6,16 @@ import com.google.android.libraries.launcherclient.ISerializableScrollCallback;
 import com.google.android.libraries.launcherclient.GoogleNow;
 
 public class NexusLauncherOverlay implements Launcher.LauncherOverlay, ISerializableScrollCallback {
+
     private GoogleNow mNowConnection;
     private Launcher.LauncherOverlayCallbacks mOverlayCallbacks;
-    private boolean mRestartOnStop;
-    private int mFlags;
-    private boolean mAttached;
+
     private final Launcher mLauncher;
+
+    private boolean mRestartOnStop;
+    private boolean mAttached;
+
+    private int mFlags;
 
     public NexusLauncherOverlay(Launcher launcher) {
         mAttached = false;

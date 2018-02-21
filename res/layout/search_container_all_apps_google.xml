@@ -23,7 +23,7 @@
     android:layout_marginTop="4dp"
     android:background="@drawable/bg_qsb_click_feedback"
     android:contentDescription="@string/label_search"
-    android:translationY="30dp">
+    android:translationY="36dp">
 
     <ImageView
         android:id="@+id/g_icon"

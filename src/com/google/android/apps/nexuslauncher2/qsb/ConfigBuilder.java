@@ -119,7 +119,7 @@ public class ConfigBuilder {
     private RemoteViews cb() {
         final RemoteViews remoteViews = new RemoteViews(mActivity.getPackageName(), R.layout.apps_search_qsb_template);
         final int n = qsbLayout.getHeight() - qsbLayout.getPaddingTop() - qsbLayout.getPaddingBottom() + 20;
-        final Bitmap mShadowBitmap = qsbLayout.mShadowBitmap;
+        final Bitmap mShadowBitmap = qsbLayout.shadowBitmap;
         final int n2 = (mShadowBitmap.getWidth() - n) / 2;
         final int n3 = (qsbLayout.getHeight() - mShadowBitmap.getHeight()) / 2;
         remoteViews.setViewPadding(R.layout.all_apps_discovery_loading_divider, qsbLayout.getPaddingLeft() - n2, n3, qsbLayout.getPaddingRight() - n2, n3);

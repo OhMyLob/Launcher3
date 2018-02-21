@@ -39,7 +39,7 @@ public abstract class AbstractQsbLayout extends FrameLayout implements LauncherL
     protected View mMicIconView;
     private final RectF mDestRect;
     private final Rect mSrcRect;
-    protected Bitmap mShadowBitmap;
+    protected Bitmap shadowBitmap;
     protected final Paint mShadowPaint;
 
     protected abstract int getWidth(int i);
@@ -88,7 +88,7 @@ public abstract class AbstractQsbLayout extends FrameLayout implements LauncherL
     public void setSearchBarColor(int i) {
         if (mColor != i) {
             mColor = i;
-            mShadowBitmap = null;
+            shadowBitmap = null;
             invalidate();
         }
     }
@@ -118,11 +118,12 @@ public abstract class AbstractQsbLayout extends FrameLayout implements LauncherL
     }
 
     public void draw(Canvas canvas) {
-        if (mShadowBitmap == null) {
+        if (shadowBitmap == null) {
             int iconBitmapSize = LauncherAppState.getIDP(getContext()).iconBitmapSize;
-            mShadowBitmap = createBitmap(((float) iconBitmapSize) * 0.010416667f, ((float) iconBitmapSize) * 0.020833334f, mColor);
+            shadowBitmap = createBitmap(((float) iconBitmapSize) * 0.0010416667f,
+                    ((float) iconBitmapSize) * 0.0020833334f, mColor);
         }
-        loadDimensions(mShadowBitmap, canvas);
+        loadDimensions(shadowBitmap, canvas);
         super.draw(canvas);
     }
 
@@ -156,12 +157,12 @@ public abstract class AbstractQsbLayout extends FrameLayout implements LauncherL
 
     protected Bitmap createBitmap(float shadowBlur, float keyShadowDistance, int color) {
         int height = (getHeight() - getPaddingTop()) - getPaddingBottom();
-        int i2 = height + 20;
+        int finalHeight = height + 20;
         Builder builder = new Builder(color);
         builder.shadowBlur = shadowBlur;
         builder.keyShadowDistance = keyShadowDistance;
         builder.keyShadowAlpha = builder.ambientShadowAlpha;
-        Bitmap createPill = builder.createPill(i2, height);
+        Bitmap createPill = builder.createPill(finalHeight, height);
         if (Color.alpha(color) < 255) {
             Canvas canvas = new Canvas(createPill);
             Paint paint = new Paint();

@@ -215,8 +215,7 @@ public class AllAppsQsbLayout extends AbstractQsbLayout implements SearchUiManag
     }
 
     public void onExtractedColorsChanged(final WallpaperColorInfo wallpaperColorInfo) {
-        int color = Themes.getAttrBoolean(mActivity, R.attr.isMainColorDark) ? 0xEBFFFFFE : 0xCCFFFFFE;
-        setSearchBarColor(ColorUtils.compositeColors(ColorUtils.compositeColors(color, Themes.getAttrColor(mActivity, R.attr.allAppsScrimColor)), wallpaperColorInfo.getMainColor()));
+        setSearchBarColor(WallpaperColorInfo.getInstance(getContext()).isDark() ? 0xEBFFFFFE : getResources().getColor(R.color.searchBarBgColor));
     }
 
     public void preDispatchKeyEvent(final KeyEvent keyEvent) {

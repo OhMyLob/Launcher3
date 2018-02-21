@@ -64,7 +64,7 @@ public class HotseatQsbWidget extends AbstractQsbLayout {
 
     private void setColors() {
         View.inflate(new ContextThemeWrapper(getContext(), mIsDefaultLiveWallpaper ? R.style.HotseatQsbTheme_Colored : R.style.HotseatQsbTheme), R.layout.qsb_hotseat_content, this);
-        setSearchBarColor(getResources().getColor(R.color.searchBarBgColor));
+        setSearchBarColor(mIsDefaultLiveWallpaper ? 0xCCFFFFFF : 0x99FAFAFA);
     }
 
     private void openQSB() {

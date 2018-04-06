@@ -111,8 +111,7 @@ public class LauncherIcons {
                         context.getDrawable(R.drawable.adaptive_icon_drawable_wrapper).mutate();
                 dr.setBounds(0, 0, 1, 1);
                 scale = normalizer.getScale(icon, null, dr.getIconMask(), outShape);
-                if (OMLSettings.isLegacyIconsTreatmentEnabled(context) &&
-                        !outShape[0]){
+                if (OMLSettings.isLegacyIconsTreatmentEnabled(context)) {
                     Drawable wrappedIcon = wrapToAdaptiveIconDrawable(context, icon, scale);
                     if (wrappedIcon != icon) {
                         icon = wrappedIcon;
@@ -165,8 +164,7 @@ public class LauncherIcons {
                         context.getDrawable(R.drawable.adaptive_icon_drawable_wrapper).mutate();
                 dr.setBounds(0, 0, 1, 1);
                 scale = normalizer.getScale(icon, iconBounds, dr.getIconMask(), outShape);
-                if (Utilities.ATLEAST_OREO && OMLSettings.isLegacyIconsTreatmentEnabled(context) &&
-                        !outShape[0]) {
+                if (Utilities.ATLEAST_OREO && OMLSettings.isLegacyIconsTreatmentEnabled(context)) {
                     Drawable wrappedIcon = wrapToAdaptiveIconDrawable(context, icon, scale);
                     if (wrappedIcon != icon) {
                         icon = wrappedIcon;
@@ -218,7 +216,7 @@ public class LauncherIcons {
                 icon instanceof AdaptiveIconDrawable) {
             scale = ShadowGenerator.getScaleForBounds(new RectF(0, 0, 0, 0));
         }
-        Bitmap bitmap =  createIconBitmap(icon, context, scale);
+        Bitmap bitmap = createIconBitmap(icon, context, scale);
         if (FeatureFlags.ADAPTIVE_ICON_SHADOW && Utilities.ATLEAST_OREO &&
                 icon instanceof AdaptiveIconDrawable) {
             bitmap = ShadowGenerator.getInstance(context).recreateIcon(bitmap);
@@ -268,17 +266,17 @@ public class LauncherIcons {
             final Canvas canvas = sCanvas;
             canvas.setBitmap(bitmap);
 
-            final int left = (textureWidth-width) / 2;
-            final int top = (textureHeight-height) / 2;
+            final int left = (textureWidth - width) / 2;
+            final int top = (textureHeight - height) / 2;
 
             sOldBounds.set(icon.getBounds());
             if (Utilities.ATLEAST_OREO && icon instanceof AdaptiveIconDrawable) {
-                int offset = Math.max((int)(ShadowGenerator.BLUR_FACTOR * iconBitmapSize),
+                int offset = Math.max((int) (ShadowGenerator.BLUR_FACTOR * iconBitmapSize),
                         Math.min(left, top));
                 int size = Math.max(width, height);
                 icon.setBounds(offset, offset, size, size);
             } else {
-                icon.setBounds(left, top, left+width, top+height);
+                icon.setBounds(left, top, left + width, top + height);
             }
             canvas.save(Canvas.MATRIX_SAVE_FLAG);
             canvas.scale(scale, scale, textureWidth / 2, textureHeight / 2);
@@ -321,12 +319,12 @@ public class LauncherIcons {
     }
 
     public static Bitmap createShortcutIcon(ShortcutInfoCompat shortcutInfo, Context context,
-            boolean badged) {
+                                            boolean badged) {
         return createShortcutIcon(shortcutInfo, context, badged, null);
     }
 
     public static Bitmap createShortcutIcon(ShortcutInfoCompat shortcutInfo, Context context,
-            final Bitmap fallbackIcon) {
+                                            final Bitmap fallbackIcon) {
         Provider<Bitmap> fallbackIconProvider = new Provider<Bitmap>() {
             @Override
             public Bitmap get() {
@@ -339,7 +337,7 @@ public class LauncherIcons {
     }
 
     public static Bitmap createShortcutIcon(ShortcutInfoCompat shortcutInfo, Context context,
-            boolean badged, @Nullable Provider<Bitmap> fallbackIconProvider) {
+                                            boolean badged, @Nullable Provider<Bitmap> fallbackIconProvider) {
         LauncherAppState app = LauncherAppState.getInstance(context);
         Drawable unbadgedDrawable = DeepShortcutManager.getInstance(context)
                 .getShortcutIconDrawable(shortcutInfo,

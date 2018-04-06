@@ -32,6 +32,7 @@ import com.google.android.apps.nexuslauncher2.smartspace.SmartspaceController;
 import static com.google.android.apps.nexuslauncher2.oml.OMLSettings.APP_VERSION_PREF;
 import static com.google.android.apps.nexuslauncher2.oml.OMLSettings.ENABLE_MINUS_ONE_PREF;
 import static com.google.android.apps.nexuslauncher2.oml.OMLSettings.ICON_PACK_PREF;
+import static com.google.android.apps.nexuslauncher2.oml.OMLSettings.IS_SMARTSMACE_ENABLED_PREF;
 import static com.google.android.apps.nexuslauncher2.oml.OMLSettings.LEGACY_ICONS_TREATMENT;
 import static com.google.android.apps.nexuslauncher2.oml.OMLSettings.SHOW_PREDICTIONS_PREF;
 import static com.google.android.apps.nexuslauncher2.oml.OMLSettings.SMARTSPACE_PREF;
@@ -89,6 +90,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
 
             findPreference(SHOW_PREDICTIONS_PREF).setOnPreferenceChangeListener(this);
             findPreference(LEGACY_ICONS_TREATMENT).setOnPreferenceChangeListener(this);
+            findPreference(IS_SMARTSMACE_ENABLED_PREF).setOnPreferenceChangeListener(this);
         }
 
         private String getDisplayGoogleTitle() {
@@ -117,6 +119,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
         public boolean onPreferenceChange(Preference preference, final Object newValue) {
             switch (preference.getKey()) {
                 case ICON_PACK_PREF:
+                case IS_SMARTSMACE_ENABLED_PREF:
                     ProgressDialog.show(mContext,
                             null /* title */,
                             mContext.getString(R.string.state_loading),
@@ -139,10 +142,10 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                                     .addCategory(Intent.CATEGORY_HOME)
                                     .setPackage(mContext.getPackageName())
                                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            PendingIntent pi = PendingIntent.getActivity(mContext, 0,
+                            PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0,
                                     homeIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_ONE_SHOT);
                             ((AlarmManager) getContext().getSystemService(ALARM_SERVICE)).setExact(
-                                    AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 50, pi);
+                                    AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 50, pendingIntent);
 
                             Process.killProcess(Process.myPid());
                         }

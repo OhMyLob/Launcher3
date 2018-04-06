@@ -88,6 +88,7 @@ import com.android.launcher3.util.VerticalFlingDetector;
 import com.android.launcher3.util.WallpaperOffsetInterpolator;
 import com.android.launcher3.widget.PendingAddShortcutInfo;
 import com.android.launcher3.widget.PendingAddWidgetInfo;
+import com.google.android.apps.nexuslauncher2.oml.OMLSettings;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -598,6 +599,11 @@ public class Workspace extends PagedView
                 }
             });
         }
+
+        if (OMLSettings.isSmartspaceEnabled(getContext())) {
+            return;
+        }
+
         // Always add a QSB on the first screen.
         if (qsb == null) {
             // In transposed layout, we add the QSB in the Grid. As workspace does not touch the

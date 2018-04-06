@@ -82,6 +82,13 @@
         android:summary="@string/legacy_icons_treatment_summary"
         android:title="@string/legacy_icons_treatment_title" />
 
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="pref_is_smartspace_disabled"
+        android:persistent="true"
+        android:summary="@string/is_smartspace_disabled_summary"
+        android:title="@string/is_smartspace_disabled_title" />
+
     <PreferenceScreen
         android:key="about_screen"
         android:persistent="false"

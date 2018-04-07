@@ -44,14 +44,24 @@ public class AllAppsList {
 
     public static final int DEFAULT_APPLICATIONS_NUMBER = 42;
 
-    /** The list off all apps. */
+    /**
+     * The list off all apps.
+     */
     public final ArrayList<AppInfo> data = new ArrayList<>(DEFAULT_APPLICATIONS_NUMBER);
-    /** The list of apps that have been added since the last notify() call. */
+    /**
+     * The list of apps that have been added since the last notify() call.
+     */
     public ArrayList<AppInfo> added = new ArrayList<>(DEFAULT_APPLICATIONS_NUMBER);
-    /** The list of apps that have been removed since the last notify() call. */
+    /**
+     * The list of apps that have been removed since the last notify() call.
+     */
     public ArrayList<AppInfo> removed = new ArrayList<>();
-    /** The list of apps that have been modified since the last notify() call. */
+    /**
+     * The list of apps that have been modified since the last notify() call.
+     */
     public ArrayList<AppInfo> modified = new ArrayList<>();
+
+    public final ArrayList<AppInfo> unfilteredData = new ArrayList<>();
 
     private IconCache mIconCache;
 
@@ -68,17 +78,19 @@ public class AllAppsList {
     /**
      * Add the supplied ApplicationInfo objects to the list, and enqueue it into the
      * list to broadcast when notify() is called.
-     *
+     * <p>
      * If the app is already in the list, doesn't add it.
      */
     public void add(AppInfo info, LauncherActivityInfo activityInfo) {
+        mIconCache.getTitleAndIcon(info, activityInfo, true /* useLowResIcon */);
+        unfilteredData.add(info);
+
         if (!mAppFilter.shouldShowApp(info.componentName)) {
             return;
         }
         if (findAppInfo(info.componentName, info.user) != null) {
             return;
         }
-        mIconCache.getTitleAndIcon(info, activityInfo, true /* useLowResIcon */);
 
         data.add(info);
         added.add(info);
@@ -92,6 +104,7 @@ public class AllAppsList {
         if (applicationInfo == null) {
             PromiseAppInfo info = new PromiseAppInfo(installInfo);
             mIconCache.getTitleAndIcon(info, info.usingLowResIcon);
+            unfilteredData.add(info);
             data.add(info);
             added.add(info);
         }
@@ -101,9 +114,11 @@ public class AllAppsList {
         // the <em>removed</em> list is handled by the caller
         // so not adding it here
         data.remove(appInfo);
+        unfilteredData.remove(appInfo);
     }
 
     public void clear() {
+        unfilteredData.clear();
         data.clear();
         // TODO: do we clear these too?
         added.clear();
@@ -142,6 +157,7 @@ public class AllAppsList {
             if (info.user.equals(user) && packageName.equals(info.componentName.getPackageName())) {
                 removed.add(info);
                 data.remove(i);
+                unfilteredData.remove(info);
             }
         }
     }
@@ -161,7 +177,7 @@ public class AllAppsList {
     }
 
     public void updateIconsAndLabels(HashSet<String> packages, UserHandle user,
-            ArrayList<AppInfo> outUpdates) {
+                                     ArrayList<AppInfo> outUpdates) {
         for (AppInfo info : data) {
             if (info.user.equals(user) && packages.contains(info.componentName.getPackageName())) {
                 mIconCache.updateTitleAndIcon(info);
@@ -201,6 +217,7 @@ public class AllAppsList {
                 } else {
                     mIconCache.getTitleAndIcon(applicationInfo, info, true /* useLowResIcon */);
                     modified.add(applicationInfo);
+                    unfilteredData.remove(applicationInfo);
                 }
             }
         } else {
@@ -212,6 +229,7 @@ public class AllAppsList {
                     removed.add(applicationInfo);
                     mIconCache.remove(applicationInfo.componentName, user);
                     data.remove(i);
+                    unfilteredData.remove(applicationInfo);
                 }
             }
         }
@@ -222,7 +240,7 @@ public class AllAppsList {
      * Returns whether <em>apps</em> contains <em>component</em>.
      */
     private static boolean findActivity(List<LauncherActivityInfo> apps,
-            ComponentName component) {
+                                        ComponentName component) {
         for (LauncherActivityInfo info : apps) {
             if (info.getComponentName().equals(component)) {
                 return true;
@@ -236,9 +254,10 @@ public class AllAppsList {
      *
      * @return the corresponding AppInfo or null
      */
-    private @Nullable AppInfo findAppInfo(@NonNull ComponentName componentName,
-                                          @NonNull UserHandle user) {
-        for (AppInfo info: data) {
+    private @Nullable
+    AppInfo findAppInfo(@NonNull ComponentName componentName,
+                        @NonNull UserHandle user) {
+        for (AppInfo info : data) {
             if (componentName.equals(info.componentName) && user.equals(info.user)) {
                 return info;
             }

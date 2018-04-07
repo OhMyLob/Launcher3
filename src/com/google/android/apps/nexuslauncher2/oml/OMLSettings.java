@@ -1,7 +1,10 @@
 package com.google.android.apps.nexuslauncher2.oml;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.SharedPreferences;
 
+import com.android.launcher3.LauncherFiles;
 import com.android.launcher3.Utilities;
 
 public class OMLSettings {
@@ -24,5 +27,21 @@ public class OMLSettings {
 
     public static boolean isSmartspaceEnabled(Context context) {
         return Utilities.getPrefs(context).getBoolean(IS_SMARTSMACE_ENABLED_PREF, IS_SMARTSMACE_ENABLED_DEFAULT);
+    }
+
+    public static boolean hasIconPack(Context context) {
+        return !Utilities.getPrefs(context).getString(OMLSettings.ICON_PACK_PREF, "").isEmpty();
+    }
+
+    public static boolean isComponentHidden(Context context, ComponentName component) {
+        return hiddenAppsPrefs(context).getBoolean(component.getClassName(), false);
+    }
+
+    public static void setComponentHidden(Context context, ComponentName component, boolean hidden) {
+        hiddenAppsPrefs(context).edit().putBoolean(component.getClassName(), hidden).apply();
+    }
+
+    private static SharedPreferences hiddenAppsPrefs(Context context) {
+        return context.getSharedPreferences(LauncherFiles.HIDDEN_APPS_PREFERENCES_KEY, Context.MODE_PRIVATE);
     }
 }

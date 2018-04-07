@@ -4,13 +4,19 @@ import android.content.ComponentName;
 import android.content.Context;
 
 import com.android.launcher3.AppFilter;
+import com.google.android.apps.nexuslauncher2.oml.OMLSettings;
 
 import java.util.HashSet;
 
 public class NexusAppFilter extends AppFilter {
+
+    private final Context mContext;
+
     private final HashSet<ComponentName> mHideList = new HashSet<>();
 
     public NexusAppFilter(Context context) {
+        mContext = context;
+
         //Voice Search
         mHideList.add(ComponentName.unflattenFromString("com.google.android.googlequicksearchbox/.VoiceSearchActivity"));
 
@@ -23,6 +29,6 @@ public class NexusAppFilter extends AppFilter {
 
     @Override
     public boolean shouldShowApp(ComponentName componentName) {
-        return !mHideList.contains(componentName);
+        return !mHideList.contains(componentName) && !OMLSettings.isComponentHidden(mContext, componentName);
     }
 }

@@ -89,6 +89,18 @@
         android:summary="@string/is_smartspace_disabled_summary"
         android:title="@string/is_smartspace_disabled_title" />
 
+    <Preference
+        android:key="pref_hide_apps"
+        android:summary="@string/hide_apps_summary"
+        android:title="@string/hide_apps_title">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.google.android.apps.nexuslauncher2.HideAppsActivity"
+            android:targetPackage="com.google.android.apps.nexuslauncher2" />
+
+    </Preference>
+
     <PreferenceScreen
         android:key="about_screen"
         android:persistent="false"

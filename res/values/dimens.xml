@@ -46,7 +46,6 @@
     <dimen name="dynamic_grid_hotseat_land_left_nav_bar_left_padding">0dp</dimen>
     <dimen name="dynamic_grid_hotseat_land_right_nav_bar_left_padding">0dp</dimen>
 
-
     <!-- Drop target bar -->
     <dimen name="dynamic_grid_drop_target_size">48dp</dimen>
     <dimen name="vert_drop_target_vertical_gap">20dp</dimen>
@@ -247,4 +246,7 @@
     <dimen name="hotseat_qsb_scroll_shadow_blur_radius">1.5dp</dimen>
     <dimen name="hotseat_qsb_scroll_key_shadow_offset">2dp</dimen>
     <dimen name="all_apps_extra_search_padding">8dp</dimen>
+
+    <dimen name="hide_apps_icon_size">40dp</dimen>
+    <dimen name="hide_apps_icon_margin">16dp</dimen>
 </resources>

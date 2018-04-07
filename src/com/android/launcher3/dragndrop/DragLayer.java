@@ -64,6 +64,7 @@ import com.android.launcher3.util.Themes;
 import com.android.launcher3.util.Thunk;
 import com.android.launcher3.util.TouchController;
 import com.android.launcher3.widget.WidgetsBottomSheet;
+import com.matteolobello.pixellauncher.oml.OMLSettings;
 
 import java.util.ArrayList;
 
@@ -453,7 +454,7 @@ public class DragLayer extends InsettableFrameLayout {
     @Override
     public void setInsets(Rect insets) {
         super.setInsets(insets);
-        setBackground(insets.top == 0 ? null
+        setBackground(insets.top == 0 || !OMLSettings.isStatusBarScrimEnabled(getContext()) ? null
                 : Themes.getAttrDrawable(getContext(), R.attr.workspaceStatusBarScrim));
     }
 

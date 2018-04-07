@@ -24,6 +24,9 @@ public class OMLSettings {
     public static final String SOLID_UI_PREF = "pref_solid_ui";
     public static final boolean SOLID_UI_DEFAULT = true;
 
+    public static final String STATUS_BAR_SCRIM_PREF = "pref_status_bar_scrim";
+    public static final boolean STATUS_BAR_SCRIM_DEFAULT = true;
+
     public static boolean isLegacyIconsTreatmentEnabled(Context context) {
         return Utilities.getPrefs(context).getBoolean(LEGACY_ICONS_TREATMENT, LEGACY_ICONS_TREATMENT_DEFAULT);
     }
@@ -38,6 +41,10 @@ public class OMLSettings {
 
     public static boolean isSolidUiEnabled(Context context) {
         return Utilities.getPrefs(context).getBoolean(SOLID_UI_PREF, SOLID_UI_DEFAULT);
+    }
+
+    public static boolean isStatusBarScrimEnabled(Context context) {
+        return Utilities.getPrefs(context).getBoolean(STATUS_BAR_SCRIM_PREF, STATUS_BAR_SCRIM_DEFAULT);
     }
 
     public static boolean isComponentHidden(Context context, ComponentName component) {

@@ -81,10 +81,11 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             mIconPackPref = (CustomIconPreference) findPreference(OMLSettings.ICON_PACK_PREF);
             mIconPackPref.setOnPreferenceChangeListener(this);
 
+            findPreference(OMLSettings.SOLID_UI_PREF).setOnPreferenceChangeListener(this);
             findPreference(OMLSettings.SHOW_PREDICTIONS_PREF).setOnPreferenceChangeListener(this);
             findPreference(OMLSettings.LEGACY_ICONS_TREATMENT).setOnPreferenceChangeListener(this);
             findPreference(OMLSettings.IS_SMARTSMACE_ENABLED_PREF).setOnPreferenceChangeListener(this);
-            findPreference(OMLSettings.SOLID_UI_PREF).setOnPreferenceChangeListener(this);
+            findPreference(OMLSettings.STATUS_BAR_SCRIM_PREF).setOnPreferenceChangeListener(this);
         }
 
         private String getDisplayGoogleTitle() {
@@ -115,6 +116,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                 case OMLSettings.ICON_PACK_PREF:
                 case OMLSettings.IS_SMARTSMACE_ENABLED_PREF:
                 case OMLSettings.SOLID_UI_PREF:
+                case OMLSettings.STATUS_BAR_SCRIM_PREF:
                     ProgressDialog.show(mContext,
                             null /* title */,
                             mContext.getString(R.string.state_loading),

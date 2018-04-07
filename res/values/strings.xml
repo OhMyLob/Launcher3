@@ -349,4 +349,6 @@
     <string name="hide_apps_summary">Select the apps you want to hide</string>
     <string name="solid_ui_title">Solid UI</string>
     <string name="solid_ui_summary">Enable Solid UI</string>
+    <string name="status_bar_scrim_summary">Show or hide the StatusBar scrim on your homescreen</string>
+    <string name="status_bar_scrim_title">Show StatusBar scrim</string>
 </resources>

@@ -76,6 +76,13 @@
         android:title="@string/pref_icon_pack" />
 
     <SwitchPreference
+        android:defaultValue="true"
+        android:key="pref_solid_ui"
+        android:persistent="true"
+        android:summary="@string/solid_ui_summary"
+        android:title="@string/solid_ui_title" />
+
+    <SwitchPreference
         android:defaultValue="false"
         android:key="pref_legacy_icons_treatment"
         android:persistent="true"
@@ -91,10 +98,10 @@
 
     <SwitchPreference
         android:defaultValue="true"
-        android:key="pref_solid_ui"
+        android:key="pref_status_bar_scrim"
         android:persistent="true"
-        android:summary="@string/solid_ui_summary"
-        android:title="@string/solid_ui_title" />
+        android:summary="@string/status_bar_scrim_summary"
+        android:title="@string/status_bar_scrim_title" />
 
     <Preference
         android:key="pref_hide_apps"

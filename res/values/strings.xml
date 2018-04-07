@@ -347,4 +347,6 @@
     <string name="github_repo_summary">This Launcher is fully Open Source. Click here to open the repo on GitHub</string>
     <string name="hide_apps_title">Hide apps</string>
     <string name="hide_apps_summary">Select the apps you want to hide</string>
+    <string name="solid_ui_title">Solid UI</string>
+    <string name="solid_ui_summary">Enable Solid UI</string>
 </resources>

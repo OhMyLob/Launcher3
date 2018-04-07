@@ -89,6 +89,13 @@
         android:summary="@string/is_smartspace_disabled_summary"
         android:title="@string/is_smartspace_disabled_title" />
 
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="pref_solid_ui"
+        android:persistent="true"
+        android:summary="@string/solid_ui_summary"
+        android:title="@string/solid_ui_title" />
+
     <Preference
         android:key="pref_hide_apps"
         android:summary="@string/hide_apps_summary"

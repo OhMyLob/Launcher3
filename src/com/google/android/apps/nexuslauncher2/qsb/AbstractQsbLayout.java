@@ -32,6 +32,7 @@ import com.android.launcher3.Utilities;
 import com.android.launcher3.compat.LauncherAppsCompat;
 import com.android.launcher3.graphics.ShadowGenerator.Builder;
 import com.google.android.apps.nexuslauncher2.NexusLauncherActivity;
+import com.google.android.apps.nexuslauncher2.oml.OMLSettings;
 
 public abstract class AbstractQsbLayout extends FrameLayout implements LauncherLayoutChangeListener, OnClickListener, OnSharedPreferenceChangeListener {
     protected final NexusLauncherActivity mActivity;
@@ -41,6 +42,8 @@ public abstract class AbstractQsbLayout extends FrameLayout implements LauncherL
     private final Rect mSrcRect;
     protected Bitmap shadowBitmap;
     protected final Paint mShadowPaint;
+
+    private final boolean mIsSolidUiEnabled;
 
     protected abstract int getWidth(int i);
 
@@ -61,6 +64,8 @@ public abstract class AbstractQsbLayout extends FrameLayout implements LauncherL
         mShadowPaint = new Paint(1);
         mColor = 0;
         mActivity = (NexusLauncherActivity) Launcher.getLauncher(context);
+
+        mIsSolidUiEnabled = OMLSettings.isSolidUiEnabled(context);
     }
 
     @Override
@@ -120,8 +125,12 @@ public abstract class AbstractQsbLayout extends FrameLayout implements LauncherL
     public void draw(Canvas canvas) {
         if (shadowBitmap == null) {
             int iconBitmapSize = LauncherAppState.getIDP(getContext()).iconBitmapSize;
-            shadowBitmap = createBitmap(((float) iconBitmapSize) * 0.0010416667f,
-                    ((float) iconBitmapSize) * 0.0020833334f, mColor);
+            if (mIsSolidUiEnabled) {
+                shadowBitmap = createBitmap(((float) iconBitmapSize) * 0.0010416667f,
+                        ((float) iconBitmapSize) * 0.0020833334f, mColor);
+            } else {
+                shadowBitmap = createBitmap(((float) iconBitmapSize) * 0.010416667f, ((float) iconBitmapSize) * 0.020833334f, mColor);
+            }
         }
         loadDimensions(shadowBitmap, canvas);
         super.draw(canvas);

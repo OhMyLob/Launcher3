@@ -27,6 +27,7 @@ import com.android.launcher3.allapps.AlphabeticalAppsList;
 import com.android.launcher3.allapps.SearchUiManager;
 import com.android.launcher3.dynamicui.WallpaperColorInfo;
 import com.android.launcher3.util.Themes;
+import com.google.android.apps.nexuslauncher2.oml.OMLSettings;
 
 public class AllAppsQsbLayout extends AbstractQsbLayout implements SearchUiManager, WallpaperColorInfo.OnChangeListener {
 
@@ -40,6 +41,8 @@ public class AllAppsQsbLayout extends AbstractQsbLayout implements SearchUiManag
     private AlphabeticalAppsList mApps;
     private SpringAnimation mSpring;
     private float mStartY;
+
+    private final boolean mIsSolidUiEnabled;
 
     public AllAppsQsbLayout(final Context context) {
         this(context, null);
@@ -68,6 +71,8 @@ public class AllAppsQsbLayout extends AbstractQsbLayout implements SearchUiManag
                 allAppsQsbLayout.setTranslationY(Math.round(mStartY + v));
             }
         }, 0f);
+
+        mIsSolidUiEnabled = OMLSettings.isSolidUiEnabled(context);
     }
 
     private void searchFallback() {
@@ -156,56 +161,65 @@ public class AllAppsQsbLayout extends AbstractQsbLayout implements SearchUiManag
         instance.addOnChangeListener(this);
         onExtractedColorsChanged(instance);
 
-        mDefaultGoogleIconColor = getResources().getColor(R.color.searchBarGoogleIconColor);
+        mDefaultGoogleIconColor = mIsSolidUiEnabled ? getResources().getColor(R.color.searchBarGoogleIconColor) : Color.TRANSPARENT;
 
         mGoogleIcon = findViewById(R.id.g_icon);
         mGoogleIcon.setColorFilter(mDefaultGoogleIconColor);
 
-        setSearchBarColor(getResources().getColor(R.color.searchBarBgColor));
+        if (mIsSolidUiEnabled) {
+            setSearchBarColor(getResources().getColor(R.color.searchBarBgColor));
+        }
     }
 
     public void onClick(final View view) {
         super.onClick(view);
         if (view == this) {
-            ValueAnimator anim = new ValueAnimator();
-            anim.setIntValues(mDefaultGoogleIconColor, Color.TRANSPARENT);
-            anim.setEvaluator(new ArgbEvaluator());
-            anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    mGoogleIcon.setColorFilter((Integer) valueAnimator.getAnimatedValue());
-                }
-            });
-            anim.addListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animator) {
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animator) {
-                    final ConfigBuilder f = new ConfigBuilder(AllAppsQsbLayout.this, true);
-                    if (!mActivity.getGoogleNow().startSearch(f.build(), f.getExtras())) {
-                        searchFallback();
+            if (mIsSolidUiEnabled) {
+                ValueAnimator anim = new ValueAnimator();
+                anim.setIntValues(mDefaultGoogleIconColor, Color.TRANSPARENT);
+                anim.setEvaluator(new ArgbEvaluator());
+                anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        mGoogleIcon.setColorFilter((Integer) valueAnimator.getAnimatedValue());
+                    }
+                });
+                anim.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animator) {
                     }
 
-                    new android.os.Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            mGoogleIcon.setColorFilter(mDefaultGoogleIconColor);
+                    @Override
+                    public void onAnimationEnd(Animator animator) {
+                        final ConfigBuilder f = new ConfigBuilder(AllAppsQsbLayout.this, true);
+                        if (!mActivity.getGoogleNow().startSearch(f.build(), f.getExtras())) {
+                            searchFallback();
                         }
-                    }, 300);
-                }
 
-                @Override
-                public void onAnimationCancel(Animator animator) {
-                }
+                        new android.os.Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mGoogleIcon.setColorFilter(mDefaultGoogleIconColor);
+                            }
+                        }, 300);
+                    }
 
-                @Override
-                public void onAnimationRepeat(Animator animator) {
+                    @Override
+                    public void onAnimationCancel(Animator animator) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animator) {
+                    }
+                });
+                anim.setDuration(45);
+                anim.start();
+            } else {
+                final ConfigBuilder f = new ConfigBuilder(this, true);
+                if (!mActivity.getGoogleNow().startSearch(f.build(), f.getExtras())) {
+                    searchFallback();
                 }
-            });
-            anim.setDuration(45);
-            anim.start();
+            }
         }
     }
 
@@ -215,7 +229,15 @@ public class AllAppsQsbLayout extends AbstractQsbLayout implements SearchUiManag
     }
 
     public void onExtractedColorsChanged(final WallpaperColorInfo wallpaperColorInfo) {
-        setSearchBarColor(WallpaperColorInfo.getInstance(getContext()).isDark() ? 0xEBFFFFFE : getResources().getColor(R.color.searchBarBgColor));
+        if (OMLSettings.isSolidUiEnabled(mActivity)) {
+            setSearchBarColor(
+                    WallpaperColorInfo.getInstance(getContext()).isDark()
+                            ? 0xEBFFFFFE
+                            : getResources().getColor(R.color.searchBarBgColor));
+        } else {
+            int color = Themes.getAttrBoolean(mActivity, R.attr.isMainColorDark) ? 0xEBFFFFFE : 0xCCFFFFFE;
+            setSearchBarColor(ColorUtils.compositeColors(ColorUtils.compositeColors(color, Themes.getAttrColor(mActivity, R.attr.allAppsScrimColor)), wallpaperColorInfo.getMainColor()));
+        }
     }
 
     public void preDispatchKeyEvent(final KeyEvent keyEvent) {

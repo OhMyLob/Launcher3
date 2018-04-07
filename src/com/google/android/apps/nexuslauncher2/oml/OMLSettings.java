@@ -21,6 +21,9 @@ public class OMLSettings {
     public static final String IS_SMARTSMACE_ENABLED_PREF = "pref_is_smartspace_disabled";
     public static final boolean IS_SMARTSMACE_ENABLED_DEFAULT = false;
 
+    public static final String SOLID_UI_PREF = "pref_solid_ui";
+    public static final boolean SOLID_UI_DEFAULT = true;
+
     public static boolean isLegacyIconsTreatmentEnabled(Context context) {
         return Utilities.getPrefs(context).getBoolean(LEGACY_ICONS_TREATMENT, LEGACY_ICONS_TREATMENT_DEFAULT);
     }
@@ -31,6 +34,10 @@ public class OMLSettings {
 
     public static boolean hasIconPack(Context context) {
         return !Utilities.getPrefs(context).getString(OMLSettings.ICON_PACK_PREF, "").isEmpty();
+    }
+
+    public static boolean isSolidUiEnabled(Context context) {
+        return Utilities.getPrefs(context).getBoolean(SOLID_UI_PREF, SOLID_UI_DEFAULT);
     }
 
     public static boolean isComponentHidden(Context context, ComponentName component) {

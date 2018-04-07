@@ -37,6 +37,7 @@ import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.dynamicui.WallpaperColorInfo;
 import com.android.launcher3.util.Themes;
+import com.google.android.apps.nexuslauncher2.oml.OMLSettings;
 
 /**
  * Draws a translucent radial gradient background from an initial state with progress 0.0 to a
@@ -49,8 +50,8 @@ public class GradientView extends View implements WallpaperColorInfo.OnChangeLis
     private static final int ALPHA_MASK_WIDTH_DP = 2;
     private static final boolean DEBUG = false;
 
-    private static final boolean GRADIENT_PREVIEW_IN_WORKSPACE = false;
-    private static final boolean DYNAMIC_SCRIM_COLOR = false;
+    private final boolean mGradientPreviewInWorkspace;
+    private final boolean mDynamicScrimColor;
 
     private final Bitmap mAlphaGradientMask;
 
@@ -74,17 +75,28 @@ public class GradientView extends View implements WallpaperColorInfo.OnChangeLis
 
     public GradientView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        boolean isSolidUiEnabled = OMLSettings.isSolidUiEnabled(context);
+
+        mDynamicScrimColor = !isSolidUiEnabled;
+        mGradientPreviewInWorkspace = !isSolidUiEnabled;
+
         DisplayMetrics dm = getResources().getDisplayMetrics();
         this.mMaskHeight = Utilities.pxFromDp(ALPHA_MASK_HEIGHT_DP, dm);
         this.mMaskWidth = Utilities.pxFromDp(ALPHA_MASK_WIDTH_DP, dm);
         Launcher launcher = Launcher.getLauncher(context);
         this.mAlphaStart = launcher.getDeviceProfile().isVerticalBarLayout() ? 0 : 100;
-        this.mScrimColor = DYNAMIC_SCRIM_COLOR
-                ? Themes.getAttrColor(context, R.attr.allAppsScrimColor)
-                : context.getResources().getColor(WallpaperColorInfo.getInstance(context).isDark()
-                        ? R.color.darkAppDrawerBgColor : R.color.lightAppDrawerBgColor);
+        if (isSolidUiEnabled) {
+            this.mScrimColor = mDynamicScrimColor
+                    ? Themes.getAttrColor(context, R.attr.allAppsScrimColor)
+                    : context.getResources().getColor(WallpaperColorInfo.getInstance(context).isDark()
+                    ? R.color.darkAppDrawerBgColor : R.color.lightAppDrawerBgColor);
+        } else {
+            this.mScrimColor = Themes.getAttrColor(context, R.attr.allAppsScrimColor);
+        }
         this.mWallpaperColorInfo = WallpaperColorInfo.getInstance(launcher);
-        mAlphaColors = getResources().getInteger(R.integer.extracted_color_gradient_alpha);
+
+        mAlphaColors = isSolidUiEnabled ? 255 : getResources().getInteger(R.integer.extracted_color_gradient_alpha);
         updateColors();
         mAlphaGradientMask = createDitheredAlphaMask();
     }
@@ -137,19 +149,19 @@ public class GradientView extends View implements WallpaperColorInfo.OnChangeLis
                 mWidth * 0.5f,
                 mHeight * gradientCenterY,
                 radius,
-                new int[] {mColor1, mColor1, mColor2},
-                new float[] {0f, posScreenBottom, 1f},
+                new int[]{mColor1, mColor1, mColor2},
+                new float[]{0f, posScreenBottom, 1f},
                 Shader.TileMode.CLAMP);
         mPaintNoScrim.setShader(shaderNoScrim);
 
-        int color1 = ColorUtils.compositeColors(mScrimColor,mColor1);
-        int color2 = ColorUtils.compositeColors(mScrimColor,mColor2);
+        int color1 = ColorUtils.compositeColors(mScrimColor, mColor1);
+        int color2 = ColorUtils.compositeColors(mScrimColor, mColor2);
         RadialGradient shaderWithScrim = new RadialGradient(
                 mWidth * 0.5f,
                 mHeight * gradientCenterY,
                 radius,
-                new int[] { color1, color1, color2 },
-                new float[] {0f, posScreenBottom, 1f},
+                new int[]{color1, color1, color2},
+                new float[]{0f, posScreenBottom, 1f},
                 Shader.TileMode.CLAMP);
         mPaintWithScrim.setShader(shaderWithScrim);
     }
@@ -168,7 +180,7 @@ public class GradientView extends View implements WallpaperColorInfo.OnChangeLis
     protected void onDraw(Canvas canvas) {
         Paint paint = mShowScrim ? mPaintWithScrim : mPaintNoScrim;
 
-        float head = GRADIENT_PREVIEW_IN_WORKSPACE ? 0.29F : 0f;
+        float head = mGradientPreviewInWorkspace ? 0.29F : 0f;
         float linearProgress = head + (mProgress * (1f - head));
         float startMaskY = (1f - linearProgress) * mHeight - mMaskHeight * linearProgress;
         float interpolatedAlpha = (255 - mAlphaStart) * mAccelerator.getInterpolation(mProgress);

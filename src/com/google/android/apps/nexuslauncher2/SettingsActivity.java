@@ -36,6 +36,7 @@ import static com.google.android.apps.nexuslauncher2.oml.OMLSettings.IS_SMARTSMA
 import static com.google.android.apps.nexuslauncher2.oml.OMLSettings.LEGACY_ICONS_TREATMENT;
 import static com.google.android.apps.nexuslauncher2.oml.OMLSettings.SHOW_PREDICTIONS_PREF;
 import static com.google.android.apps.nexuslauncher2.oml.OMLSettings.SMARTSPACE_PREF;
+import static com.google.android.apps.nexuslauncher2.oml.OMLSettings.SOLID_UI_PREF;
 
 public class SettingsActivity extends com.android.launcher3.SettingsActivity implements PreferenceFragment.OnPreferenceStartFragmentCallback {
 
@@ -91,6 +92,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(SHOW_PREDICTIONS_PREF).setOnPreferenceChangeListener(this);
             findPreference(LEGACY_ICONS_TREATMENT).setOnPreferenceChangeListener(this);
             findPreference(IS_SMARTSMACE_ENABLED_PREF).setOnPreferenceChangeListener(this);
+            findPreference(SOLID_UI_PREF).setOnPreferenceChangeListener(this);
         }
 
         private String getDisplayGoogleTitle() {
@@ -120,6 +122,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             switch (preference.getKey()) {
                 case ICON_PACK_PREF:
                 case IS_SMARTSMACE_ENABLED_PREF:
+                case SOLID_UI_PREF:
                     ProgressDialog.show(mContext,
                             null /* title */,
                             mContext.getString(R.string.state_loading),

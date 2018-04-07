@@ -37,7 +37,7 @@ import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.dynamicui.WallpaperColorInfo;
 import com.android.launcher3.util.Themes;
-import com.google.android.apps.nexuslauncher2.oml.OMLSettings;
+import com.matteolobello.pixellauncher.oml.OMLSettings;
 
 /**
  * Draws a translucent radial gradient background from an initial state with progress 0.0 to a

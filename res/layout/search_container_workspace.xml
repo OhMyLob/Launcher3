@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<com.google.android.apps.nexuslauncher2.smartspace.SmartspaceView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.matteolobello.pixellauncher.smartspace.SmartspaceView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@id/search_container_workspace"
     android:layout_width="fill_parent"
     android:layout_height="0dp"
@@ -31,4 +31,4 @@
         android:visibility="invisible" />
 
     <include layout="@layout/smartspace_singleline" />
-</com.google.android.apps.nexuslauncher2.smartspace.SmartspaceView>
+</com.matteolobello.pixellauncher.smartspace.SmartspaceView>

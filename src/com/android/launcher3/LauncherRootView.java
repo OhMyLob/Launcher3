@@ -11,8 +11,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewDebug;
 
-import com.google.android.apps.nexuslauncher2.oml.OMLSettings;
-
 import static com.android.launcher3.util.SystemUiController.FLAG_DARK_NAV;
 import static com.android.launcher3.util.SystemUiController.UI_STATE_ROOT_VIEW;
 

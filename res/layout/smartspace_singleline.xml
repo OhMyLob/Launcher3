@@ -23,7 +23,7 @@
     android:animateLayoutChanges="true"
     android:orientation="horizontal">
 
-    <com.google.android.apps.nexuslauncher2.graphics.IcuDateTextView
+    <com.matteolobello.pixellauncher.graphics.IcuDateTextView
         android:id="@+id/clock"
         style="@style/TextTitle"
         android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
             android:layout_marginRight="4dp"
             android:scaleType="fitXY" />
 
-        <com.google.android.apps.nexuslauncher2.graphics.DoubleShadowTextView
+        <com.matteolobello.pixellauncher.graphics.DoubleShadowTextView
             android:id="@+id/title_weather_text"
             style="@style/TextTitle"
             android:layout_width="wrap_content"

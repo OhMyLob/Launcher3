@@ -33,7 +33,7 @@ android {
 
     productFlavors {
         aosp {
-            applicationId 'com.google.android.apps.nexuslauncher2'
+            applicationId 'com.matteolobello.pixellauncher'
             testApplicationId 'com.android.launcher3.tests'
         }
 

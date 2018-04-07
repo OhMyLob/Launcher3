@@ -48,7 +48,7 @@ import com.android.launcher3.model.PackageItemInfo;
 import com.android.launcher3.shortcuts.DeepShortcutManager;
 import com.android.launcher3.shortcuts.ShortcutInfoCompat;
 import com.android.launcher3.util.Provider;
-import com.google.android.apps.nexuslauncher2.oml.OMLSettings;
+import com.matteolobello.pixellauncher.oml.OMLSettings;
 
 /**
  * Helper methods for generating various launcher icons

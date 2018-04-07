@@ -22,7 +22,7 @@
     android:layout_gravity="center"
     android:orientation="vertical">
 
-    <com.google.android.apps.nexuslauncher2.graphics.DoubleShadowTextView
+    <com.matteolobello.pixellauncher.graphics.DoubleShadowTextView
         android:id="@+id/title_text"
         style="@style/TextTitle"
         android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
             android:layout_marginRight="6dp"
             android:layout_weight="0.0" />
 
-        <com.google.android.apps.nexuslauncher2.graphics.DoubleShadowTextView
+        <com.matteolobello.pixellauncher.graphics.DoubleShadowTextView
             android:id="@+id/subtitle_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                 android:layout_marginRight="4dp"
                 android:scaleType="fitXY" />
 
-            <com.google.android.apps.nexuslauncher2.graphics.DoubleShadowTextView
+            <com.matteolobello.pixellauncher.graphics.DoubleShadowTextView
                 android:id="@+id/subtitle_weather_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

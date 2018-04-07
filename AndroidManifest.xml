@@ -33,13 +33,13 @@
     name in the permissions. eq com.mypackage.permission.READ_SETTINGS
     -->
     <permission
-        android:name="com.google.android.apps.nexuslauncher2.permission.READ_SETTINGS"
+        android:name="com.matteolobello.pixellauncher.permission.READ_SETTINGS"
         android:description="@string/permdesc_read_settings"
         android:label="@string/permlab_read_settings"
         android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
         android:protectionLevel="normal" />
     <permission
-        android:name="com.google.android.apps.nexuslauncher2.permission.WRITE_SETTINGS"
+        android:name="com.matteolobello.pixellauncher.permission.WRITE_SETTINGS"
         android:description="@string/permdesc_write_settings"
         android:label="@string/permlab_write_settings"
         android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
@@ -47,15 +47,15 @@
 
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="com.google.android.apps.nexuslauncher2.permission.READ_SETTINGS" />
-    <uses-permission android:name="com.google.android.apps.nexuslauncher2.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="com.matteolobello.pixellauncher.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.matteolobello.pixellauncher.permission.WRITE_SETTINGS" />
 
     <!-- Pixel -->
     <permission
-        android:name="com.google.android.apps.nexuslauncher2.permission.QSB"
+        android:name="com.matteolobello.pixellauncher.permission.QSB"
         android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
         android:protectionLevel="signature" />
-    <uses-permission android:name="com.google.android.apps.nexuslauncher2.permission.QSB" />
+    <uses-permission android:name="com.matteolobello.pixellauncher.permission.QSB" />
 
     <!-- Custom -->
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
@@ -77,7 +77,7 @@
         attributes and intent filters the same
         -->
         <activity
-            android:name="com.google.android.apps.nexuslauncher2.NexusLauncherActivity"
+            android:name="com.matteolobello.pixellauncher.NexusLauncherActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:enabled="true"
@@ -102,7 +102,7 @@
         The settings activity. When extending keep the intent filter present
         -->
         <activity
-            android:name="com.google.android.apps.nexuslauncher2.SettingsActivity"
+            android:name="com.matteolobello.pixellauncher.SettingsActivity"
             android:autoRemoveFromRecents="true"
             android:label="@string/settings_button_text"
             android:theme="@style/SettingsTheme">
@@ -113,7 +113,7 @@
         </activity>
 
         <activity
-            android:name="com.google.android.apps.nexuslauncher2.HideAppsActivity"
+            android:name="com.matteolobello.pixellauncher.HideAppsActivity"
             android:autoRemoveFromRecents="true"
             android:label="@string/hide_apps_title"
             android:theme="@style/SettingsTheme" />
@@ -125,33 +125,33 @@
         -->
         <provider
             android:name="com.android.launcher3.LauncherProvider"
-            android:authorities="com.google.android.apps.nexuslauncher2.settings"
+            android:authorities="com.matteolobello.pixellauncher.settings"
             android:exported="true"
-            android:readPermission="com.google.android.apps.nexuslauncher2.permission.READ_SETTINGS"
-            android:writePermission="com.google.android.apps.nexuslauncher2.permission.WRITE_SETTINGS" />
+            android:readPermission="com.matteolobello.pixellauncher.permission.READ_SETTINGS"
+            android:writePermission="com.matteolobello.pixellauncher.permission.WRITE_SETTINGS" />
 
         <!--
         Pixel
         -->
         <activity
-            android:name="com.google.android.apps.nexuslauncher2.search.AppLaunchActivity"
+            android:name="com.matteolobello.pixellauncher.search.AppLaunchActivity"
             android:theme="@android:style/Theme.NoDisplay">
             <intent-filter android:priority="1">
-                <action android:name="com.google.android.apps.nexuslauncher2.search.APP_LAUNCH" />
+                <action android:name="com.matteolobello.pixellauncher.search.APP_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data
                     android:mimeType="vnd.android.cursor.dir/vnd.android.search.suggest"
                     android:scheme="content" />
             </intent-filter>
         </activity>
-        <receiver android:name="com.google.android.apps.nexuslauncher2.smartspace.SmartspaceBroadcastReceiver">
+        <receiver android:name="com.matteolobello.pixellauncher.smartspace.SmartspaceBroadcastReceiver">
             <intent-filter>
-                <action android:name="com.google.android.apps.nexuslauncher2.UPDATE_SMARTSPACE" />
+                <action android:name="com.matteolobello.pixellauncher.UPDATE_SMARTSPACE" />
             </intent-filter>
         </receiver>
         <provider
-            android:name="com.google.android.apps.nexuslauncher2.search.AppSearchProvider"
-            android:authorities="com.google.android.apps.nexuslauncher2.appssearch"
+            android:name="com.matteolobello.pixellauncher.search.AppSearchProvider"
+            android:authorities="com.matteolobello.pixellauncher.appssearch"
             android:exported="true" />
 
         <!-- ENABLE_FOR_TESTING

@@ -68,7 +68,7 @@
         android:summary="%s"
         android:title="@string/icon_shape_override_label" />
 
-    <com.google.android.apps.nexuslauncher2.CustomIconPreference
+    <com.matteolobello.pixellauncher.CustomIconPreference
         android:defaultValue=""
         android:key="pref_icon_pack"
         android:persistent="true"
@@ -90,7 +90,7 @@
         android:title="@string/is_smartspace_disabled_title" />
 
     <SwitchPreference
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="pref_solid_ui"
         android:persistent="true"
         android:summary="@string/solid_ui_summary"

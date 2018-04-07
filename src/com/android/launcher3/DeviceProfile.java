@@ -33,7 +33,6 @@ import android.widget.FrameLayout;
 
 import com.android.launcher3.CellLayout.ContainerType;
 import com.android.launcher3.badge.BadgeRenderer;
-import com.google.android.apps.nexuslauncher2.oml.OMLSettings;
 
 import java.util.ArrayList;
 

@@ -105,7 +105,7 @@ public class LauncherIcons {
         float scale = 1f;
         if (!FeatureFlags.LAUNCHER3_DISABLE_ICON_NORMALIZATION) {
             normalizer = IconNormalizer.getInstance(context);
-            if (Utilities.ATLEAST_OREO && iconAppTargetSdk >= Build.VERSION_CODES.O) {
+            if (Utilities.ATLEAST_OREO && iconAppTargetSdk >= Build.VERSION_CODES.BASE) {
                 boolean[] outShape = new boolean[1];
                 AdaptiveIconDrawable dr = (AdaptiveIconDrawable)
                         context.getDrawable(R.drawable.adaptive_icon_drawable_wrapper).mutate();
@@ -164,7 +164,7 @@ public class LauncherIcons {
                         context.getDrawable(R.drawable.adaptive_icon_drawable_wrapper).mutate();
                 dr.setBounds(0, 0, 1, 1);
                 scale = normalizer.getScale(icon, iconBounds, dr.getIconMask(), outShape);
-                if (Utilities.ATLEAST_OREO && OMLSettings.isLegacyIconsTreatmentEnabled(context)) {
+                if (OMLSettings.isLegacyIconsTreatmentEnabled(context)) {
                     Drawable wrappedIcon = wrapToAdaptiveIconDrawable(context, icon, scale);
                     if (wrappedIcon != icon) {
                         icon = wrappedIcon;
@@ -295,7 +295,7 @@ public class LauncherIcons {
      * create AdaptiveIconDrawable.
      */
     static Drawable wrapToAdaptiveIconDrawable(Context context, Drawable drawable, float scale) {
-        if (!(OMLSettings.isLegacyIconsTreatmentEnabled(context) && Utilities.ATLEAST_OREO)) {
+        if (!Utilities.ATLEAST_OREO || !OMLSettings.isLegacyIconsTreatmentEnabled(context)) {
             return drawable;
         }
 
@@ -306,7 +306,7 @@ public class LauncherIcons {
                 FixedScaleDrawable fsd = ((FixedScaleDrawable) iconWrapper.getForeground());
                 fsd.setDrawable(drawable);
                 fsd.setScale(scale);
-                return (Drawable) iconWrapper;
+                return iconWrapper;
             }
         } catch (Exception e) {
             return drawable;

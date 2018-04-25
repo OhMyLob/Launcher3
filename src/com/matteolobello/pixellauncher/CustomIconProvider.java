@@ -154,7 +154,7 @@ public class CustomIconProvider extends DynamicIconProvider implements Runnable 
             drawable = super.getIcon(launcherActivityInfo, iconDpi, flattenDrawable);
             if ((!Utilities.ATLEAST_OREO || !(drawable instanceof AdaptiveIconDrawable)) &&
                     !"com.google.android.calendar".equals(packageName)) {
-                Drawable roundIcon = getRoundIcon(packageName, iconDpi);
+                Drawable roundIcon = getRoundIcon(launcherActivityInfo.getComponentName(), iconDpi);
                 if (roundIcon != null) {
                     drawable = roundIcon;
                 }
@@ -163,17 +163,40 @@ public class CustomIconProvider extends DynamicIconProvider implements Runnable 
         return drawable;
     }
 
-    private Drawable getRoundIcon(String packageName, int iconDpi) {
+    private Drawable getRoundIcon(ComponentName component, int iconDpi) {
+        String appIcon = null;
+        Map<String, String> elementTags = new HashMap<>();
+
         try {
-            Resources resourcesForApplication = mPackageManager.getResourcesForApplication(packageName);
+            Resources resourcesForApplication = mContext.getPackageManager().getResourcesForApplication(component.getPackageName());
             AssetManager assets = resourcesForApplication.getAssets();
+
             XmlResourceParser parseXml = assets.openXmlResourceParser("AndroidManifest.xml");
-            while (parseXml.next() != XmlPullParser.END_DOCUMENT)
-                if (parseXml.getEventType() == XmlPullParser.START_TAG && parseXml.getName().equals("application"))
-                    for (int i = 0; i < parseXml.getAttributeCount(); i++)
-                        if (parseXml.getAttributeName(i).equals("roundIcon"))
-                            return resourcesForApplication.getDrawableForDensity(Integer.parseInt(parseXml.getAttributeValue(i).substring(1)), iconDpi);
+            while (parseXml.next() != XmlPullParser.END_DOCUMENT) {
+                if (parseXml.getEventType() == XmlPullParser.START_TAG) {
+                    String name = parseXml.getName();
+                    for (int i = 0; i < parseXml.getAttributeCount(); i++) {
+                        elementTags.put(parseXml.getAttributeName(i), parseXml.getAttributeValue(i));
+                    }
+                    if (elementTags.containsKey("icon")) {
+                        if (name.equals("application")) {
+                            appIcon = elementTags.get("roundIcon");
+                        } else if ((name.equals("activity") || name.equals("activity-alias")) &&
+                                elementTags.containsKey("name") &&
+                                elementTags.get("name").equals(component.getClassName())) {
+                            appIcon = elementTags.get("roundIcon");
+                            break;
+                        }
+                    }
+                    elementTags.clear();
+                }
+            }
             parseXml.close();
+
+            if (appIcon != null) {
+                int resId = Integer.parseInt(appIcon.substring(1));
+                return resourcesForApplication.getDrawableForDensity(resId, iconDpi);
+            }
         } catch (PackageManager.NameNotFoundException | Resources.NotFoundException | IOException | XmlPullParserException ex) {
             ex.printStackTrace();
         }

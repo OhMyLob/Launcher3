@@ -91,6 +91,13 @@
 
     <SwitchPreference
         android:defaultValue="false"
+        android:key="pref_legacy_icons_treatment_background_color"
+        android:persistent="true"
+        android:summary="@string/pref_legacy_icons_treatment_background_color_summary"
+        android:title="@string/pref_legacy_icons_treatment_background_color_title" />
+
+    <SwitchPreference
+        android:defaultValue="false"
         android:key="pref_is_smartspace_disabled"
         android:persistent="true"
         android:summary="@string/is_smartspace_disabled_summary"

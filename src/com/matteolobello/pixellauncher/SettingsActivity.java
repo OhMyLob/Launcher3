@@ -84,6 +84,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
             findPreference(OMLSettings.SOLID_UI_PREF).setOnPreferenceChangeListener(this);
             findPreference(OMLSettings.SHOW_PREDICTIONS_PREF).setOnPreferenceChangeListener(this);
             findPreference(OMLSettings.LEGACY_ICONS_TREATMENT).setOnPreferenceChangeListener(this);
+            findPreference(OMLSettings.LEGACY_ICONS_TRATMENT_BACKGROUND_COLOR).setOnPreferenceChangeListener(this);
             findPreference(OMLSettings.IS_SMARTSMACE_ENABLED_PREF).setOnPreferenceChangeListener(this);
             findPreference(OMLSettings.STATUS_BAR_SCRIM_PREF).setOnPreferenceChangeListener(this);
         }
@@ -157,6 +158,7 @@ public class SettingsActivity extends com.android.launcher3.SettingsActivity imp
                     confirmationFragment.show(getFragmentManager(), preference.getKey());
                     break;
                 case OMLSettings.LEGACY_ICONS_TREATMENT:
+                case OMLSettings.LEGACY_ICONS_TRATMENT_BACKGROUND_COLOR:
                     ProgressDialog.show(mContext,
                             null /* title */,
                             mContext.getString(R.string.state_loading),

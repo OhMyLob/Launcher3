@@ -351,4 +351,6 @@
     <string name="solid_ui_summary">Enable Solid UI</string>
     <string name="status_bar_scrim_summary">Show or hide the StatusBar scrim on your homescreen</string>
     <string name="status_bar_scrim_title">Show StatusBar scrim</string>
+    <string name="pref_legacy_icons_treatment_background_color_summary">Color the Adaptive icons background when they are not adaptive</string>
+    <string name="pref_legacy_icons_treatment_background_color_title">Legacy Icons Tratment background color</string>
 </resources>

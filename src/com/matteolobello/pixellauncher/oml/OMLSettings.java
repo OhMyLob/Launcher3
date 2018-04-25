@@ -18,6 +18,9 @@ public class OMLSettings {
     public static final String LEGACY_ICONS_TREATMENT = "pref_legacy_icons_treatment";
     public static final boolean LEGACY_ICONS_TREATMENT_DEFAULT = false;
 
+    public static final String LEGACY_ICONS_TRATMENT_BACKGROUND_COLOR = "pref_legacy_icons_treatment_background_color";
+    public static final boolean LEGACY_ICONS_TRATMENT_BACKGROUND_COLOR_DEFAULT = false;
+
     public static final String IS_SMARTSMACE_ENABLED_PREF = "pref_is_smartspace_disabled";
     public static final boolean IS_SMARTSMACE_ENABLED_DEFAULT = false;
 
@@ -29,6 +32,10 @@ public class OMLSettings {
 
     public static boolean isLegacyIconsTreatmentEnabled(Context context) {
         return Utilities.getPrefs(context).getBoolean(LEGACY_ICONS_TREATMENT, LEGACY_ICONS_TREATMENT_DEFAULT);
+    }
+
+    public static boolean isLegacyIconsTreatmentBackgroundColorEnabled(Context context) {
+        return Utilities.getPrefs(context).getBoolean(LEGACY_ICONS_TRATMENT_BACKGROUND_COLOR, LEGACY_ICONS_TRATMENT_BACKGROUND_COLOR_DEFAULT);
     }
 
     public static boolean isSmartspaceEnabled(Context context) {

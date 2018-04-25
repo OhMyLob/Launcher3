@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Rect;
@@ -36,6 +37,7 @@ import android.os.Build;
 import android.os.Process;
 import android.os.UserHandle;
 import android.support.annotation.Nullable;
+import android.support.v7.graphics.Palette;
 
 import com.android.launcher3.AppInfo;
 import com.android.launcher3.FastBitmapDrawable;
@@ -111,7 +113,7 @@ public class LauncherIcons {
                         context.getDrawable(R.drawable.adaptive_icon_drawable_wrapper).mutate();
                 dr.setBounds(0, 0, 1, 1);
                 scale = normalizer.getScale(icon, null, dr.getIconMask(), outShape);
-                if (OMLSettings.isLegacyIconsTreatmentEnabled(context)) {
+                if (OMLSettings.isLegacyIconsTreatmentEnabled(context) && !outShape[0]) {
                     Drawable wrappedIcon = wrapToAdaptiveIconDrawable(context, icon, scale);
                     if (wrappedIcon != icon) {
                         icon = wrappedIcon;
@@ -164,7 +166,7 @@ public class LauncherIcons {
                         context.getDrawable(R.drawable.adaptive_icon_drawable_wrapper).mutate();
                 dr.setBounds(0, 0, 1, 1);
                 scale = normalizer.getScale(icon, iconBounds, dr.getIconMask(), outShape);
-                if (OMLSettings.isLegacyIconsTreatmentEnabled(context)) {
+                if (OMLSettings.isLegacyIconsTreatmentEnabled(context) && !outShape[0]) {
                     Drawable wrappedIcon = wrapToAdaptiveIconDrawable(context, icon, scale);
                     if (wrappedIcon != icon) {
                         icon = wrappedIcon;
@@ -306,6 +308,11 @@ public class LauncherIcons {
                 FixedScaleDrawable fsd = ((FixedScaleDrawable) iconWrapper.getForeground());
                 fsd.setDrawable(drawable);
                 fsd.setScale(scale);
+                if (OMLSettings.isLegacyIconsTreatmentBackgroundColorEnabled(context)) {
+                    Drawable background = iconWrapper.getBackground();
+                    Bitmap bitmap = drawableToBitmap(iconWrapper.getForeground());
+                    background.setTint(extractAdaptiveBackgroundFromBitmap(bitmap));
+                }
                 return iconWrapper;
             }
         } catch (Exception e) {
@@ -382,6 +389,59 @@ public class LauncherIcons {
             badgeBitmap = pkgInfo.iconBitmap;
         }
         return badgeBitmap;
+    }
+
+    public static Bitmap drawableToBitmap(Drawable drawable) {
+        Bitmap bitmap;
+
+        try {
+            if (drawable instanceof BitmapDrawable) {
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+                if (bitmapDrawable.getBitmap() != null) {
+                    return bitmapDrawable.getBitmap();
+                }
+            }
+
+            if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+                bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+            } else {
+                bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            }
+
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+        } catch (Throwable t) {
+            bitmap = null;
+        }
+        return bitmap;
+    }
+
+    public static int extractAdaptiveBackgroundFromBitmap(Bitmap bitmap) {
+        int background;
+        try {
+            Palette palette = Palette.from(bitmap).generate();
+            if (palette.getLightMutedSwatch() != null) {
+                background = palette.getLightMutedSwatch().getRgb();
+            } else if (palette.getMutedSwatch() != null) {
+                background = palette.getMutedSwatch().getRgb();
+            } else if (palette.getLightVibrantSwatch() != null) {
+                background = palette.getLightVibrantSwatch().getRgb();
+            } else if (palette.getVibrantSwatch() != null) {
+                background = palette.getVibrantSwatch().getRgb();
+            } else if (palette.getDarkVibrantSwatch() != null) {
+                background = palette.getDarkVibrantSwatch().getRgb();
+            } else if (palette.getDarkMutedSwatch() != null) {
+                background = palette.getDarkMutedSwatch().getRgb();
+            } else if (palette.getDominantSwatch() != null) {
+                background = palette.getDominantSwatch().getRgb();
+            } else {
+                background = Color.WHITE;
+            }
+        } catch (Throwable t) {
+            background = Color.WHITE;
+        }
+        return background;
     }
 
     /**
